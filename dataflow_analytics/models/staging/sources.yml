@@ -1,0 +1,10 @@
+
+version: 2
+
+sources:
+  - name: raw
+    database: DATAFLOW_DB
+    schema: RAW
+    tables:
+      - name: online_retail
+        identifier: ONLINE_RETAIL

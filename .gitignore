@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Data files
+data/raw/
+data/processed/
+*.xlsx
+*.xls
+*.csv
+
+# Logs and temporary files
+logs/
+*.log
+.DS_Store
+
+# dbt
+dataflow_analytics/target/
+dataflow_analytics/dbt_packages/
+dataflow_analytics/logs/
+dataflow_analytics/profiles.yml
+
+# Tableau / Power BI local files
+*.hyper
+*.twb
+*.twbx
+*.pbix
+
+# IDE
+.vscode/

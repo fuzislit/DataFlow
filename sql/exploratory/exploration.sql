@@ -1,0 +1,45 @@
+-- Monthly revenue
+SELECT
+DATE_TRUNC('MONTH', "InvoiceDate") AS MONTH,
+SUM("Quantity" * "Price") AS REVENUE
+FROM DATAFLOW_DB.RAW.ONLINE_RETAIL
+GROUP BY MONTH
+ORDER BY MONTH;
+
+
+-- Revenue by country
+SELECT
+"Country",
+SUM("Quantity" * "Price") AS REVENUE
+FROM DATAFLOW_DB.RAW.ONLINE_RETAIL
+GROUP BY "Country"
+ORDER BY REVENUE DESC;
+
+
+-- Top products by revenue
+SELECT
+"StockCode",
+"Description",
+SUM("Quantity" * "Price") AS REVENUE
+FROM DATAFLOW_DB.RAW.ONLINE_RETAIL
+GROUP BY "StockCode", "Description"
+ORDER BY REVENUE DESC
+LIMIT 10;
+
+
+-- Returns
+SELECT
+COUNT(*) AS RETURN_TRANSACTIONS,
+SUM(ABS("Quantity" * "Price")) AS RETURN_VALUE
+FROM DATAFLOW_DB.RAW.ONLINE_RETAIL
+WHERE "Quantity" < 0;
+
+
+-- Final KPIs
+SELECT
+SUM("Quantity" * "Price") AS NET_REVENUE,
+COUNT(DISTINCT "Invoice") AS TOTAL_ORDERS,
+COUNT(DISTINCT "Customer ID") AS TOTAL_CUSTOMERS,
+SUM(CASE WHEN "Quantity" < 0 THEN ABS("Quantity" * "Price") ELSE 0 END) AS RETURN_VALUE,
+SUM(CASE WHEN "Quantity" > 0 THEN "Quantity" * "Price" ELSE 0 END) AS GROSS_SALES
+FROM DATAFLOW_DB.RAW.ONLINE_RETAIL;

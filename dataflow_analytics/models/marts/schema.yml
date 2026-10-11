@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: product_sales
+    description: "Product-level sales summary."
+    columns:
+      - name: stock_code
+        description: "Unique identifier for each product."
+        data_tests:
+          - unique
+          - not_null
