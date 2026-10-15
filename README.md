@@ -28,7 +28,7 @@ DataFlow is an end-to-end data analytics project that transforms retail transact
 
 ## Dashboard
 
-_Add a screenshot of your Tableau dashboard here._
+coming soon 
 
 ## Data Cleaning
 
