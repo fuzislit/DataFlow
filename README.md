@@ -2,71 +2,53 @@
 
 ## Overview
 
-DataFlow is an end-to-end data analytics project built to practice data engineering and analytics workflows. It transforms raw retail transaction data into structured analytical models and a Tableau dashboard.
-
-The project uses Python for data cleaning, Snowflake for cloud data warehousing, dbt for SQL transformations and testing, and Tableau for visualization.
+DataFlow is an end-to-end data analytics project that transforms retail transaction data into structured analytical models and business insights. The project uses Python and Pandas for data cleaning, Snowflake for cloud data warehousing, dbt for SQL transformations and testing, and Tableau for visualization.
 
 ## Tech Stack
 
-- **Python & Pandas** — Data exploration and cleaning
-- **Snowflake** — Cloud data warehouse
-- **SQL** — Data transformations and analysis
-- **dbt** — Staging models, analytical models, and data tests
-- **Tableau** — Interactive sales dashboard
+**Python · Pandas · SQL · Snowflake · dbt · Tableau**
 
-## Pipeline Architecture
+## Pipeline
 
-1. **Data Source:** Online Retail II dataset from the UCI Machine Learning Repository.
-2. **Data Cleaning:** Python and Pandas remove duplicate records and invalid price entries while preserving return transactions.
-3. **Data Warehouse:** The cleaned dataset is loaded into a raw table in Snowflake.
-4. **Staging:** A dbt staging view standardizes column names and calculates transaction-line revenue.
-5. **Analytics Models:** dbt models aggregate monthly revenue and product-level sales metrics.
-6. **Visualization:** Tableau presents key performance indicators, monthly revenue trends, and top products by revenue.
+1. **Data Cleaning:** Cleaned and validated retail transaction records using Python and Pandas.
+2. **Data Warehousing:** Loaded the processed dataset into Snowflake.
+3. **Data Transformation:** Built dbt models to standardize data and calculate transaction-level revenue.
+4. **Data Analysis:** Developed SQL models to analyze monthly revenue and product sales, with data quality tests.
+5. **Visualization:** Created a Tableau dashboard to explore sales trends and product performance.
+
+## Key Results
+
+| Metric | Result |
+|---|---:|
+| Records processed after cleaning | 514,912 |
+| Distinct invoices | 25,543 |
+| Distinct customers | 4,381 |
+| Distinct products | 4,264 |
+| Net revenue | £9.64M |
+
+## Dashboard
+
+_Add a screenshot of your Tableau dashboard here._
 
 ## Data Cleaning
 
-The original worksheet contained 525,461 rows. After cleaning, 514,912 rows remained.
+The original dataset contained 525,461 rows. After cleaning, 514,912 rows remained.
 
-Cleaning steps included:
-- Removing exact duplicate records.
-- Removing zero-price entries and three negative-price adjustment records.
-- Retaining negative quantities to preserve returns and cancellations.
-- Retaining records with missing customer IDs for overall sales analysis.
+- Removed duplicate records.
+- Removed zero-price entries and three negative-price adjustment records.
+- Preserved negative quantities to account for returns and cancellations.
+- Retained records with missing customer IDs for overall sales analysis.
 
 ## dbt Models
 
 | Model | Purpose |
 |---|---|
-| `stg_online_retail` | Standardizes source columns and calculates line revenue |
-| `monthly_revenue` | Aggregates net revenue and distinct invoices by month |
-| `product_sales` | Aggregates product quantities, net revenue, and invoice counts |
+| `stg_online_retail` | Standardizes columns and calculates transaction-line revenue |
+| `monthly_revenue` | Aggregates monthly net revenue and distinct invoices |
+| `product_sales` | Aggregates product quantities, revenue, and invoice counts |
 
 The product sales model excludes `DOT` and `POST` from product rankings.
 
-## Dashboard
+## Data Source
 
-The Tableau dashboard includes:
-- Total net revenue
-- Total distinct invoices
-- Total distinct customers
-- Monthly revenue trend
-- Top 10 products by revenue
-- Key business insights
-
-## Project Structure
-
-```text
-dataFlow/
-├── dataflow_analytics/
-│   └── models/
-│       ├── staging/
-│       └── marts/
-├── python/
-├── sql/
-├── requirements.txt
-└── README.md
-```
-
-## Purpose
-
-This project was built as a hands-on learning exercise to develop practical skills in data cleaning, cloud data warehousing, SQL-based transformations, data testing, and analytics visualization.
+[Online Retail II — UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/502/online+retail+ii)
